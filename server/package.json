@@ -4,11 +4,16 @@
   "description": "fullstack app with angular and express js",
   "main": "index.js",
   "scripts": {
+    "start": "node index",
+    "watch": "nodemon index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
   }
 }
