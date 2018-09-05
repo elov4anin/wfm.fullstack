@@ -1,6 +1,6 @@
 module.exports.getAll = (req, res) => {
     res.status(200).json({
-        login: 'from controller'
+        message: 'Categories'
     })
 };
 

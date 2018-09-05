@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 
 const mongoose = require('mongoose');
+const passport = require('passport');
 
 const authRoutes = require('./routes/auth.route');
 const analyticsRoutes = require('./routes/analytics.route');
@@ -26,6 +27,8 @@ mongoose.connect(keys.mongoURI, {useNewUrlParser: true})
         console.log(error);
     });
 
+app.use(passport.initialize());
+require('./middleware/passport')(passport);
 
 //логи
 // create a write stream (in append mode)
