@@ -36,6 +36,7 @@ const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'),
 
 // setup the logger
 app.use(require('morgan')('combined', {stream: accessLogStream}));
+app.use('/uploads', express.static('uploads'));
 
 //для парсинга тела запроса
 app.use(bodyParser.urlencoded({extended: true}));
