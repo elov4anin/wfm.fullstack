@@ -5,14 +5,18 @@
   "main": "index.js",
   "scripts": {
     "start": "node index",
-    "watch": "nodemon index",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server": "nodemon index",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client-install": " npm install --prefix ../client",
+    "client": "npm run start --prefix ../client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
+    "concurrently": "^4.0.1",
     "cors": "^2.8.4",
     "express": "^4.16.3",
     "jsonwebtoken": "^8.3.0",
