@@ -4,7 +4,7 @@
   "description": "fullstack app with angular and express js",
   "main": "index.js",
   "scripts": {
-    "start": "node index",
+    "start": "nodemon index",
     "server": "nodemon index",
     "test": "echo \"Error: no test specified\" && exit 1",
     "client-install": " npm install --prefix ../client",
