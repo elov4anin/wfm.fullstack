@@ -29,7 +29,7 @@ export class AuthService {
     return this.http.post<User>('/api/auth/register', user);
   }
 
-  private setToken(token: string) {
+  setToken(token: string) {
     this.token = token;
   }
 

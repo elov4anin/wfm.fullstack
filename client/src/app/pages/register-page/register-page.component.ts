@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../shared/services/auth.service';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
+import {MaterialService} from '../../shared/classes/material.service';
 
 @Component({
   selector: 'app-register-page',
@@ -28,7 +29,7 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
     this.aSub = this._authService.register(this.form.value).subscribe(
       () => this._router.navigate(['/login'], {queryParams: {registred: true}}),
       error1 => {
-        console.warn(error1);
+        MaterialService.toast(error1.error.message);
         this.form.enable();
       }
     );

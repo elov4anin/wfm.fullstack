@@ -9,7 +9,8 @@ import { SiteLayoutsComponent } from './layouts/site-layouts/site-layouts.compon
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthService} from './shared/services/auth.service';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {TokenInterceptor} from './shared/classes/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,13 @@ import {HttpClientModule} from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      multi: true,
+      useClass: TokenInterceptor
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

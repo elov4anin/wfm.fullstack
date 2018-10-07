@@ -4,6 +4,7 @@ import {LoginPageComponent} from './pages/login-page/login-page.component';
 import {AuthLayoutsComponent} from './layouts/auth-layouts/auth-layouts.component';
 import {SiteLayoutsComponent} from './layouts/site-layouts/site-layouts.component';
 import {RegisterPageComponent} from './pages/register-page/register-page.component';
+import {AuthGuard} from './shared/classes/auth.guard';
 
 const appRoutes: Routes = [
   {
@@ -18,8 +19,8 @@ const appRoutes: Routes = [
           path: 'register', component: RegisterPageComponent
         }
       ]
-    }/*,
-    {path: '', component: SiteLayoutsComponent}*/
+    },
+    {path: '', component: SiteLayoutsComponent, canActivate: [AuthGuard], children: []}
 
 ];
 
