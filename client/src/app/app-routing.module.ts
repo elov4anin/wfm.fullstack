@@ -5,6 +5,12 @@ import {AuthLayoutsComponent} from './layouts/auth-layouts/auth-layouts.componen
 import {SiteLayoutsComponent} from './layouts/site-layouts/site-layouts.component';
 import {RegisterPageComponent} from './pages/register-page/register-page.component';
 import {AuthGuard} from './shared/classes/auth.guard';
+import {OverviewPageComponent} from './pages/overview-page/overview-page.component';
+import {AnalyticsPageComponent} from './pages/analytics-page/analytics-page.component';
+import {HistoryPageComponent} from './pages/history-page/history-page.component';
+import {OrderPageComponent} from './pages/order-page/order-page.component';
+import {CategoriesPageComponent} from './pages/categories-page/categories-page.component';
+import {CategoriesFormPageComponent} from './pages/categories-form-page/categories-form-page.component';
 
 const appRoutes: Routes = [
   {
@@ -20,7 +26,15 @@ const appRoutes: Routes = [
         }
       ]
     },
-    {path: '', component: SiteLayoutsComponent, canActivate: [AuthGuard], children: []}
+    {path: '', component: SiteLayoutsComponent, canActivate: [AuthGuard], children: [
+        {path: 'overview', component: OverviewPageComponent},
+        {path: 'analytics', component: AnalyticsPageComponent},
+        {path: 'history', component: HistoryPageComponent},
+        {path: 'order', component: OrderPageComponent},
+        {path: 'categories', component: CategoriesPageComponent},
+        {path: 'categories/new', component: CategoriesFormPageComponent},
+        {path: 'categories/:id', component: CategoriesFormPageComponent},
+      ]}
 
 ];
 

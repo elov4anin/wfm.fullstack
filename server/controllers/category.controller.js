@@ -7,9 +7,7 @@ module.exports.getAll = async (req, res) => {
         const categories = await Category.find({
            user: req.user.id
         });
-        res.status(200).json({
-            categories
-        });
+        res.status(200).json(categories);
 
     } catch (e) {
         errorHandler(e);
@@ -19,9 +17,9 @@ module.exports.getAll = async (req, res) => {
 module.exports.getById = async (req, res) => {
     try {
         const category = await Category.findById(req.params.id);
-        res.status(200).json({
+        res.status(200).json(
             category
-        });
+        );
 
     } catch (e) {
         errorHandler(e);
