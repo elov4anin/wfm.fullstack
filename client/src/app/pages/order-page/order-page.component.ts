@@ -2,6 +2,9 @@ import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from
 import {NavigationEnd, Router} from '@angular/router';
 import {MaterialInstance, MaterialService} from '../../shared/classes/material.service';
 import {OrderService} from './order.service';
+import {Order, OrderPosition} from '../../shared/interfaces/order.interface';
+import {OrdersService} from '../../shared/services/orders.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-order-page',
@@ -13,8 +16,15 @@ export class OrderPageComponent implements OnInit, OnDestroy, AfterViewInit {
   isRoot: boolean;
   @ViewChild('modal') modalRef: ElementRef;
   modal: MaterialInstance;
+  pendingToSrv = false;
 
-  constructor(private router: Router, private orderService: OrderService) {
+  oSub: Subscription;
+
+  constructor(
+    private router: Router,
+    public orderService: OrderService,
+    private ordersService: OrdersService
+  ) {
   }
 
   ngOnInit() {
@@ -26,9 +36,14 @@ export class OrderPageComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     });
   }
+
   ngOnDestroy() {
     this.modal.destroy();
+    if (this.oSub) {
+      this.oSub.unsubscribe();
+    }
   }
+
   ngAfterViewInit() {
     this.modal = MaterialService.initModal(this.modalRef);
   }
@@ -42,7 +57,27 @@ export class OrderPageComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   submit() {
-    this.modal.close();
+    this.pendingToSrv = true;
+    const order: Order = {
+      list: this.orderService.list.map(item => {
+        delete item._id;
+        return item;
+      })
+    };
+   this.oSub =  this.ordersService.create(order).subscribe(o => {
+      MaterialService.toast(`Заказ ${o.order} был добавлен`);
+      this.orderService.clear();
+      },
+      error1 => {
+      MaterialService.toast(error1.error.message);
+      },
+    () => {
+      this.modal.close();
+      this.pendingToSrv = false;
+    });
   }
 
+  removePosition(o: OrderPosition) {
+    this.orderService.remove(o);
+  }
 }
