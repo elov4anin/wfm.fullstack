@@ -30,7 +30,6 @@ export class OrderPageComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit() {
     this.isRoot = this.router.url === '/order';
     this.router.events.subscribe(event => {
-      console.log(event);
       if (event instanceof NavigationEnd) {
         this.isRoot = this.router.url === '/order';
       }
