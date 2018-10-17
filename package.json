@@ -11,10 +11,10 @@
     "start": "nodemon index",
     "server": "nodemon index",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "client-install": " npm install --prefix ../client",
-    "client": "npm run start --prefix ../client",
+    "client-install": " npm install --prefix client",
+    "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run client-install && npm run build --prefix ../client"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run client-install && npm run build --prefix client"
   },
   "author": "",
   "license": "ISC",
